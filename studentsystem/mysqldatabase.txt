@@ -1,0 +1,6 @@
+create database pict;
+
+create user 'rootx'@'localhost' IDENTIFIED BY 'pict123';
+
+grant all privileges on * . * TO 'rootx'@'localhost';
+

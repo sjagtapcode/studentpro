@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Student Dashboard</title>
+
+    <!-- Bootstrap CSS CDN -->
+     <link rel="stylesheet" href="link1.css">
+
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="navbar.css">
+    <script defer src="link2.css"></script>
+
+    <!-- Font Awesome JS -->
+    <script defer src="link3.css"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="table.css">
+    <link rel="stylesheet" type="text/css" href="button.css">
+    <link rel="stylesheet" type="text/css" href="register_stud.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Hello student!</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <p>Hogwarts Digital</p>
+                <li class="active">
+                    <li><a href="#" data-toggle="collapse" aria-expanded="false" ">Profile</a><li>
+                    <li><a href="#" data-toggle="collapse" aria-expanded="false" ">Attendance</a></li>
+                    <li><a href="/weekly_stats/?enroll_no={{student.enroll_no}}&division={{student.division}}" data-toggle="collapse" aria-expanded="false">Weekly Stats</a></li>
+                </li>
+                <li>
+                    <a href="#">Fee summary</a>
+                </li>
+                <li>
+                    <a href="#" data-toggle="collapse" aria-expanded="false">Logout</a>
+                </li>
+                <li>
+                    {% block nav6 %}{% endblock %}
+                </li>
+                <li>
+                    {% block nav7 %}{% endblock %}
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+        <!-- Page Content Holder -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    
+                    <img src="logo.jpg" style="width: 100px; height: 100px;margin: 0px 10px 0px 0px;">
+                        <em><h1 class="heading" style="padding-left:80px">Hogwarts University</h1></em>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                             <li class="nav-item">
+                                <a class="nav-link" href="/logout/">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="line"></div>
+            <div class="line"></div>
+<center>
+        {% block content %}
+        {% endblock %}
+</center>
+        </div>
+    </div>
+    <script src="link4.css"></script>
+    <!-- Popper.JS -->
+    <script src="link5.css"></script>
+    <!-- <script src="/static/css/link5.css"></script> -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+</body>
+</html>
