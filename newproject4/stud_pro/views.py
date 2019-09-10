@@ -8,9 +8,21 @@ def show(request):
 	return render(request,"show.html",{'teachers':teachers})
 # Create your views here.
 def dashboard(request):
-	print(request.session['login_id'])
-	if ("loginid" in request.session):
+	if ("session_on" in request.session):
 		if ("student" in request.session):
 			return render(request,"student.html")
+	#else if (request.method == "GET"):
+	#	return render(request,"login.html")
+	elif (request.method == "POST"):
+		login_id=request.POST['login_id']
+		password=request.POST['password']
+		print(login_id)
+		if (request.POST['type'] == "student"):
+			return render(request,"student.html")
+		elif (request.POST['type'] == "parent"):
+			return render(request,"parent.html")
+		else:
+			return render(request,"login.html")
+
 	else:
 		return render(request,"login.html")
