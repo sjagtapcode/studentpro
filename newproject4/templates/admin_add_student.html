@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% extends "home.html" %}
+{% block body_block %}
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p><a href="/admin_teacher">Add New Teacher</a></p>
+      <p><a href="/admin_student">Add New Student</a></p>
+      <p><a href="/admin_parent">Add New Parent</a></p>
+    </div>
+    <div class="col-sm-8 text-left"> 
+
+      <!-- teacher--->
+      <h1>Admin</h1>
+         <div class="container-fluid" style="max-width: 970px" id="student_form" >
+  
+    <div class="jumbotron jumbotron-fluid">
+
+  <form method = "POST" class ="post-form" action="/admin_student">
+      {% csrf_token%}
+    <div class = "container" style="max-width: 970px">
+  <br>
+    <div class="form-group row">
+      <label class="col-sm-1 col-form-label"></label>
+      <div class="col-sm-4">
+        <h3>Enter Student Details</h3>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Student ID:</label>
+      <div class="col-sm-4">
+        {{form.student_id}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Student Name:</label>
+      <div class="col-sm-4">
+        {{form.student_name}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Student Password:</label>
+      <div class="col-sm-4">
+        {{form.password}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Email:</label>
+      <div class="col-sm-4">
+        {{form.email}}
+      </div>
+    </div>
+
+        <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Student class(ID):</label>
+      <div class="col-sm-4">
+        <!--<select>
+      {% for element in cats %}
+      <option value={{ cats.class_id }}>{{ cats.class_name }}
+        {% endfor %}
+      </select>-->
+      {{form.cats}}
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-4">
+        <button type="submit" name="btnform2" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-4">
+        <a href="/admin_parent" class="btn btn-primary">Add Parent Info</a>
+      </div>
+    </div>
+
+    <br>
+
+    
+    </div>
+
+  </form>
+
+</div>
+
+</div>
+{% endblock %}   
+
+
+
