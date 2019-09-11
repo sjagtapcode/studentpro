@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
 
-from stud_pro.forms import teacherform,studentform,parentform 
+from stud_pro.forms import teacherform,studentform,parentform
 from stud_pro.models import *
 
+
 def show(request):
-	teachers = Teacher.objects.all()
+	teachers = Teacher.objects.raw('SELECT * FROM stud_pro_teacher')
 	return render(request,"show.html",{'teachers':teachers})
 # Create your views here.
 def login(request):
@@ -58,8 +59,21 @@ def student(request):
 		if(request.session["session_on"]=="student"):
 			login_id=request.session['login_id']
 
-			### (to-do) student dashboard here
+			# (to-do) student dashboard here
 			return render(request,"student/student.html")
+		else:
+			request.session.clear()
+			return redirect("/invalid/")
+	else:
+		return redirect("/login/")
+
+def teacher(request):
+	if("session_on" in request.session):
+		if(request.session["session_on"]=="teacher"):
+			login_id=request.session['login_id']
+
+			# (to-do) teacher dashboard here
+			return render(request,"teacher/teacher.html")
 		else:
 			request.session.clear()
 			return redirect("/invalid/")
@@ -71,14 +85,14 @@ def admin(request):
 	if("session_on" in request.session):
 		if(request.session["session_on"]=="admin"):
 			login_id=request.session['login_id']
-
 			# (to-do) admin dashboard
 			return render(request,"admin/admin.html")
 		else:
 			request.session.clear()
 			return redirect("/invalid/")
 	else:
-		return render(request,"login.html")
+		return redirect("/login/")
+
 
 def  admin_teacher(request):
 	if request.method == "POST" :
@@ -88,12 +102,11 @@ def  admin_teacher(request):
 				print(form.cleaned_data["teacher_name"])
 				form.save()
 				#return redirect("/show")
-				messages.success(request, 'Form submission successful')
 			except :
 				pass
 	else :
 		form = teacherform()
-	return render(request,"admin_add_teacher.html",{'form':form})	
+	return render(request,"admin/admin_add_teacher.html",{'form':form})	
 
 def  admin_student(request):
 	if request.method == "POST" :
@@ -104,12 +117,11 @@ def  admin_student(request):
 			print(form.cleaned_data["cats"])
 			form.save()
 			#return redirect("/show")
-			messages.success(request, 'Form submission successful')
 		except :
 			pass
 	else :
 		form = studentform()
-	return render(request,"admin_add_student.html",{'form':form})		
+	return render(request,"admin/admin_add_student.html",{'form':form})		
 
 def  admin_parent(request):
 	if request.method == "POST" :
@@ -118,18 +130,18 @@ def  admin_parent(request):
 			try :
 				form.save()
 				#return redirect("/show")
-				messages.success(request, 'Form submission successful')
 			except :
 				pass
 	else :
 		form = parentform()
-	return render(request,"admin_add_parent.html",{'form':form})
+	return render(request,"admin/admin_add_parent.html",{'form':form})
 #	return redirect("/login/")
+
+
 
 
 def logout(request):
 	if("session_on" in request.session):	#deleate everything in the session
 		request.session.clear()
 	return redirect("/login/")
-#>>>>>>> fc8de6a5be9c837a2ec3e90f2f1dc70e16f945ef
 

@@ -36,7 +36,7 @@ class Teacher(models.Model):
 class Teacher_Subject(models.Model):
 	sr_no = models.IntegerField(primary_key=True)
 	teacher_id = models.ForeignKey(Teacher,on_delete=models.CASCADE)
-	sub_id = models.ForeignKey(Subject,on_delete=models.CASCADE))
+	sub_id = models.ForeignKey(Subject,on_delete=models.CASCADE)
 
 # table class
 class Class(models.Model):

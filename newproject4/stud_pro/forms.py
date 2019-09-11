@@ -15,7 +15,6 @@ class studentform(forms.ModelForm):
 		#widgets = {
 		#'class_id' : [Class.objects.order_by('class_name').values_list('class_id', flat=True)]
 		#}
-
 #	def save(self , commit=True):
 
 class parentform(forms.ModelForm):
