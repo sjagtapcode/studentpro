@@ -42,10 +42,11 @@ def parent(request):
 	if("session_on" in request.session):
 		if(request.session["session_on"]=="parent"):
 			login_id=request.session['login_id']
-			print("parrent")
-			print(login_id)
+			
+			# (to-do) parent dashboard
 			return render(request,"parent/parent.html")
 		else:
+			request.session.clear()
 			return redirect("/invalid/")
 	else:
 		return redirect("/login/")
@@ -56,12 +57,29 @@ def student(request):
 	if("session_on" in request.session):
 		if(request.session["session_on"]=="student"):
 			login_id=request.session['login_id']
+
+			### (to-do) student dashboard here
 			return render(request,"student/student.html")
 		else:
-			del request.session['session_on']
-			return redirect("/login/")
+			request.session.clear()
+			return redirect("/invalid/")
 	else:
 		return redirect("/login/")
+
+
+def admin(request):
+	if("session_on" in request.session):
+		if(request.session["session_on"]=="admin"):
+			login_id=request.session['login_id']
+
+			# (to-do) admin dashboard
+			return render(request,"admin/admin.html")
+		else:
+			request.session.clear()
+			return redirect("/invalid/")
+	else:
+		return redirect("/login/")
+
 
 def logout(request):
 	if("session_on" in request.session):	#deleate everything in the session
