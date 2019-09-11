@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 
-from stud_pro.forms import teacherform 
+from stud_pro.forms import teacherform,studentform,parentform 
 from stud_pro.models import *
 
 def show(request):
@@ -26,3 +26,49 @@ def dashboard(request):
 
 	else:
 		return render(request,"login.html")
+
+def  admin_teacher(request):
+	if request.method == "POST" :
+		form = teacherform(request.POST)
+		if form.is_valid():
+			try :
+				print(form.cleaned_data["teacher_name"])
+				form.save()
+				#return redirect("/show")
+				messages.success(request, 'Form submission successful')
+			except :
+				pass
+	else :
+		form = teacherform()
+	return render(request,"admin_add_teacher.html",{'form':form})	
+
+def  admin_student(request):
+	if request.method == "POST" :
+		form = studentform(request.POST)
+#		if form.is_valid():
+		try :
+			print("sdjo")
+			print(form.cleaned_data["cats"])
+			form.save()
+			#return redirect("/show")
+			messages.success(request, 'Form submission successful')
+		except :
+			pass
+	else :
+		form = studentform()
+	return render(request,"admin_add_student.html",{'form':form})		
+
+def  admin_parent(request):
+	if request.method == "POST" :
+		form = parentform(request.POST)
+		if form.is_valid():
+			try :
+				form.save()
+				#return redirect("/show")
+				messages.success(request, 'Form submission successful')
+			except :
+				pass
+	else :
+		form = parentform()
+	return render(request,"admin_add_parent.html",{'form':form})
+

@@ -74,10 +74,10 @@ class Student(models.Model):
 	student_id = models.IntegerField(primary_key=True)
 	student_name = models.CharField(max_length=30)
 	password = models.CharField(max_length=30)
-	attendance = models.IntegerField()
-	marks = models.IntegerField()
+	attendance = models.IntegerField(default=0)
+	marks = models.IntegerField(default=0)
 	email = models.CharField(max_length=30)
-	parent_id = models.ForeignKey(Parent,on_delete=models.PROTECT)
+	parent_id = models.ForeignKey(Parent,on_delete=models.PROTECT,null=True)
 	class_id = models.ForeignKey(Class,on_delete=models.PROTECT)
 	def __str__(self):
 		return self.student_name

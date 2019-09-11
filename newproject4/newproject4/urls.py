@@ -19,5 +19,11 @@ from stud_pro import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/',views.dashboard),
-	path('show/', views.show)
+    path('admin_teacher', views.admin_teacher),
+    path('admin_student', views.admin_student),
+    path('admin_parent', views.admin_parent),
+	
+    path('show/', views.show)
+        #path('',views.admin1),  
+
 ]
