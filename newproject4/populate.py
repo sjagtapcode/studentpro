@@ -218,11 +218,12 @@ print("populating parents")
 pParent(200)
 print("done populating parents")
 '''
+'''
 afterclass()
 afterparent()
 print("populating classes")
 pStudent(230)
 print("done populating classes")
-
+'''
 
 
