@@ -1,8 +1,6 @@
 from django.shortcuts import render,redirect
-
 from stud_pro.forms import teacherform,studentform,parentform
 from stud_pro.models import *
-
 
 def show(request):
 	teachers = Teacher.objects.raw('SELECT * FROM stud_pro_teacher')
@@ -38,7 +36,6 @@ def login(request):
 	#request.session["invalid"]=login_id
 	return render(request,"login/login.html")
 
-
 def parent(request):
 	if("session_on" in request.session):
 		if(request.session["session_on"]=="parent"):
@@ -51,8 +48,6 @@ def parent(request):
 			return redirect("/invalid/")
 	else:
 		return redirect("/login/")
-
-
 
 def student(request):
 	if("session_on" in request.session):
@@ -71,7 +66,7 @@ def teacher(request):
 	if("session_on" in request.session):
 		if(request.session["session_on"]=="teacher"):
 			login_id=request.session['login_id']
-
+			
 			# (to-do) teacher dashboard here
 			return render(request,"teacher/teacher.html")
 		else:
@@ -86,6 +81,9 @@ def admin(request):
 		if(request.session["session_on"]=="admin"):
 			login_id=request.session['login_id']
 			# (to-do) admin dashboard
+			#find total admissions 
+			#department wise 
+			#class wise
 			return render(request,"admin/admin.html")
 		else:
 			request.session.clear()
@@ -93,55 +91,74 @@ def admin(request):
 	else:
 		return redirect("/login/")
 
+def admin_teacher(request):
+	if("session_on" in request.session):
+		if (request.session["session_on"]=="admin"):
+			if request.method == "POST" :
+				form = teacherform(request.POST)
+				request.POST['']
+				if form.is_valid():
+					try :
+						print(form.cleaned_data["teacher_name"])
+						form.save()
+						#return redirect("/show")
+					except :
+						pass
+			else :
+				form = teacherform()
+			return render(request,"admin/admin_add_teacher.html",{'form':form})
+		else:
+			request.session.clear()
+			return redirect("/invalid/")
+	else:
+		return redirect("/login/")
 
-def  admin_teacher(request):
-	if request.method == "POST" :
-		form = teacherform(request.POST)
-		if form.is_valid():
-			try :
-				print(form.cleaned_data["teacher_name"])
-				form.save()
-				#return redirect("/show")
-			except :
-				pass
-	else :
-		form = teacherform()
-	return render(request,"admin/admin_add_teacher.html",{'form':form})	
-
-def  admin_student(request):
-	if request.method == "POST" :
-		form = studentform(request.POST)
-#		if form.is_valid():
-		try :
-			print("sdjo")
-			print(form.cleaned_data["cats"])
-			form.save()
-			#return redirect("/show")
-		except :
-			pass
-	else :
-		form = studentform()
-	return render(request,"admin/admin_add_student.html",{'form':form})		
+def admin_student(request):
+	if("session_on" in request.session):
+		if (request.session["session_on"]=="admin"):
+			if request.method == "POST" :
+				form = studentform(request.POST)
+		#		if form.is_valid():
+				try :
+					print("sdjo")
+					print(form.cleaned_data["cats"])
+					form.save()
+					#return redirect("/show")
+				except :
+					pass
+			else :
+				form = studentform()
+			return render(request,"admin/admin_add_student.html",{'form':form})		
+		else:
+			request.session.clear()
+			return redirect("/invalid/")
+	else:
+		return redirect("/login/")
 
 def  admin_parent(request):
-	if request.method == "POST" :
-		form = parentform(request.POST)
-		if form.is_valid():
-			try :
-				form.save()
-				#return redirect("/show")
-			except :
-				pass
-	else :
-		form = parentform()
-	return render(request,"admin/admin_add_parent.html",{'form':form})
-#	return redirect("/login/")
-
-
-
+	if("session_on" in request.session):
+		if (request.session["session_on"]=="admin"):
+			if request.method == "POST" :
+				form = parentform(request.POST)
+				if form.is_valid():
+					try :
+						form.save()
+						#return redirect("/show")
+					except :
+						pass
+			else :
+				form = parentform()
+			return render(request,"admin/admin_add_parent.html",{'form':form})
+		else:
+			request.session.clear()
+			return redirect("/invalid/")
+	else:
+		return redirect("/login/")
 
 def logout(request):
 	if("session_on" in request.session):	#deleate everything in the session
+		del request.session["login_id"]
 		request.session.clear()
 	return redirect("/login/")
+
 

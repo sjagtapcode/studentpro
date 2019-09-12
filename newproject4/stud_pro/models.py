@@ -17,7 +17,6 @@ class Subject(models.Model):
 	sub_name = models.CharField(max_length=30)
 	semester = models.IntegerField()
 	dept_id = models.ForeignKey(Department,on_delete=models.CASCADE)
-
 	def __str__(self):
 		return self.sub_name
 
@@ -26,7 +25,7 @@ class Teacher(models.Model):
 	teacher_id = models.IntegerField(primary_key=True)
 	teacher_name = models.CharField(max_length=30)
 	password = models.CharField(max_length=30)
-	email = models.CharField(max_length=30)
+	email = models.EmailField()
 
 	def __str__(self):
 		return self.teacher_name
@@ -46,7 +45,6 @@ class Class(models.Model):
 	strength = models.IntegerField()
 	semester = models.IntegerField()
 	dept_id = models.ForeignKey(Department,on_delete=models.CASCADE)
-
 	def __str__(self):
 		return self.class_name
 
@@ -60,12 +58,11 @@ class Class_Teacher(models.Model):
 class Parent(models.Model):
 	parent_id = models.IntegerField(primary_key=True)
 	parent_name = models.CharField(max_length=30)
-	occupation = models.CharField(max_length=30)
-	address = models.CharField(max_length=30)
+	occupation = models.CharField(max_length=80)
+	address = models.CharField(max_length=200)
 	password = models.CharField(max_length=30)
-	contact_no = models.IntegerField()
-	email = models.CharField(max_length=30)
-
+	contact_no = models.CharField(max_length=15)
+	email = models.CharField(max_length=50)
 	def __str__(self):
 		return self.parent_name
 
@@ -76,10 +73,10 @@ class Student(models.Model):
 	password = models.CharField(max_length=30)
 	attendance = models.IntegerField(default=0)
 	marks = models.IntegerField(default=0)
-	email = models.CharField(max_length=30)
-
+	email = models.CharField(max_length=50)
+	contact_no = models.CharField(max_length=15,default="-")
 	parent_id = models.ForeignKey(Parent,on_delete=models.PROTECT,null=True)
-	class_id = models.ForeignKey(Class,on_delete=models.PROTECT)
+	class_id = models.ForeignKey(Class,on_delete=models.PROTECT,null=True)
 # fd43b9ce3011007c17632851ce67e7a20d9e0c06
 	def __str__(self):
 		return self.student_name

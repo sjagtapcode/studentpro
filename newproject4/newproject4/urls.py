@@ -29,5 +29,4 @@ urlpatterns = [
 	path('parent/', views.parent),
 	path('student/', views.student),
     
-#>>>>>>> fc8de6a5be9c837a2ec3e90f2f1dc70e16f945ef
 ]
