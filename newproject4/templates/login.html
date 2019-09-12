@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html> 
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" type="text/css" href="login.css">
+</head>
+<body>
+	
+<div class="split left">
+	<div class="centered">
+	</div>
+</div>
+
+<div class="split right">
+
+	<center>
+	  <img src="login_logo.jpg" style="width: 100px; height: 100px;margin: 0px 10px 0px 0px; padding-top: 70px;padding-left: 10px">
+
+		<!-- <div style="color: red;font-family: 'Arvo';font-size: 20px;top: 30%;left: 30%;position: absolute;">
+		{% block msg3 %}{% endblock %}
+		</div>
+		<div style="color: green;font-family: 'Arvo';font-size: 20px;top: 30%;left: 30%;position: absolute;">
+			{% block pass_ch %}{% endblock %}
+		</div> -->
+	</center>
+
+	<div class="centered">
+
+       <form action="" method="POST">
+
+		{% csrf_token %}
+		<div class="wrapper">
+			<input class="input" type="text" name=login_id style="top: 30px" placeholder="Login Id">
+			<span class="underline" style="top:83px"></span>
+
+			<input class="input" type="password" name=password style="top: 50px" placeholder="Password">
+			<span class="underline" style="top:153px"></span>
+		</div>
+		<br>
+		<input type="radio" name="type" value="parent" >parent
+		<input type="radio" name="type" value="student" checked>student<br>
+	  	<button type="submit" value="submit"> SUBMIT </button>
+	   </form>
+	   <br>
+  		</div>
+			<center>
+				<div style="font-family: 'Arvo';font-size: 15px;top: 75%;left: 40%;position: absolute">
+					<a href="/forgot_password/" style="color: dodgerblue">Forgot Password?</a>
+				</div>
+			</center>
+
+  		</div>
+
+	</div>
+
+</body>
+</html>
