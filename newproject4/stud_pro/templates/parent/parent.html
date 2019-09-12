@@ -2,4 +2,13 @@
 {% extends "home.html" %}
 {% block body_block %}
 	<h2>THIS is parent dashboard</h2>
+
+	<div class="w3-container">
+		{% for t in parent_det %}
+		<p>Parent id	: {{t.parent_id}} <br>
+		Parent name	: {{t.parent_name}} <br>
+		Email	: {{t.email}}
+		</p>
+		{% endfor %}
+	</div>
 {% endblock %}

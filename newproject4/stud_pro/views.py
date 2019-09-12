@@ -7,6 +7,34 @@ from stud_pro.models import *
 def show(request):
 	teachers = Teacher.objects.raw('SELECT * FROM stud_pro_teacher')
 	return render(request,"show.html",{'teachers':teachers})
+
+def class_combo(request):
+	class_com = Class.objects.all()
+	return render(request,"admin_add_student.html",{'class_com':class_com})
+
+def student_profile(request):
+	details = Student.objects.all()
+	print(details)
+	return render(request,"student/student_profile.html",{'details':details})
+
+def teacher_classes(request):
+	current_login_id=request.session['login_id']
+	teachers = Teacher_Subject.objects.filter(teacher_id__exact=current_login_id)
+	classt = Class_Teacher.objects.filter(sr_no__in= teachers)
+	class_nm = Class.objects.filter(class_id__in = classt)
+	#stud_nm = Student.objects.filter(class_id_id__in = class_nm)
+	return render(request,"teacher/teacher_classes.html",{'class_nm':class_nm})
+
+def teacher_students(request,class_id):
+	#current_login_id=request.session['login_id']
+	stud_from_cls = Student.objects.filter(class_id__exact=class_id)
+	stud_from_cls[0].password=""
+	print(class_id)
+	print(stud_from_cls)
+	#classt = Class_Teacher.objects.filter(sr_no__in= teachers)
+	#class_nm = Class.objects.filter(class_id__in = classt)
+	#stud_nm = Student.objects.filter(class_id_id__in = class_nm)
+	return render(request,"teacher/teacher_students.html",{'stud_from_cls':stud_from_cls})	
 # Create your views here.
 def login(request):
 	if ("session_on" in request.session):
@@ -23,18 +51,60 @@ def login(request):
 	elif (request.method == "POST"):
 		current_login_id=request.POST['login_id']
 		print(current_login_id)
-		password=request.POST['password']
+		password=request.POST['pass_word']
 		if (request.POST['type'] == "student"):
 			request.session['session_on']="student"
-			if (current_login_id=="admin"):		#check in database
+			if (Student.objects.filter(student_id = current_login_id).exists() ):		#check in database
 				request.session['login_id']=current_login_id
-				print("first login")
-				return redirect("/student/")
+				print(current_login_id)
+				student_det=Student.objects.filter(student_id__exact=current_login_id)
+				#print(student_det["password"])
+				if(password==student_det[0].password):
+					del student_det[0].password
+					return render(request,"student/student.html",{'student_det':student_det})
+				else :
+					request.session.clear()
+					context = { 'invalid' : "invalid password " }
+					return render(request,"login/login.html",context)
+			else :
+				request.session.clear()
+				context1 = { 'invalid_id' : "invalid id " }
+				return render(request,"login/login.html",context1)		
+     
 		elif (request.POST['type'] == "parent"):
 			request.session['session_on']="parent"
-			if(current_login_id=="papa"):
+			if (Parent.objects.filter(parent_id = current_login_id).exists() ):
 				request.session['login_id']=current_login_id
-				return redirect("/parent/")
+				print(current_login_id)
+				parent_det=Parent.objects.filter(parent_id__exact=current_login_id)
+				if(password==parent_det[0].password):
+					del parent_det[0].password
+					return render(request,"parent/parent.html",{'parent_det':parent_det})
+				else :
+					request.session.clear()
+					context = { 'invalid' : "invalid password " }
+					return render(request,"login/login.html",context)
+			else :
+				request.session.clear()
+				context1 = { 'invalid_id' : "invalid id " }
+				return render(request,"login/login.html",context1)	
+		elif(request.POST['type'] == "teacher"):
+			request.session['session_on']="teacher"
+			if (Teacher.objects.filter(teacher_id = current_login_id).exists() ):
+				request.session['login_id']=current_login_id
+				print(current_login_id)
+				teacher_det=Teacher.objects.filter(teacher_id__exact=current_login_id)
+				if(password==teacher_det[0].password):
+					del teacher_det[0].password
+					return render(request,"teacher/teacher.html",{'teacher_det':teacher_det})
+				else :
+					request.session.clear()
+					context = { 'invalid' : "invalid password " }
+					return render(request,"login/login.html",context)
+			else :
+				request.session.clear()
+				context1 = { 'invalid_id' : "invalid id " }
+				return render(request,"login/login.html",context1)	
 	#request.session["invalid"]=login_id
 	return render(request,"login/login.html")
 
@@ -66,6 +136,8 @@ def student(request):
 			return redirect("/invalid/")
 	else:
 		return redirect("/login/")
+
+
 
 def teacher(request):
 	if("session_on" in request.session):

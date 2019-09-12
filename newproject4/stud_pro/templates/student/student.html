@@ -5,4 +5,13 @@
 {% endblock%}
 {% block body_block %}
 	<h2>THIS is student dashboard</h2>
+
+	{% for t in student_det %}
+		<h4>{{t.student_id}}</h4>
+		<h4>{{t.student_name}}</h4>
+		<h4>{{t.email}}</h4>
+	{% endfor %}
+
+	
 {% endblock %}
+

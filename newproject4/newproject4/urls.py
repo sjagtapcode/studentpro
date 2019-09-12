@@ -25,9 +25,12 @@ urlpatterns = [
     path('',views.login),
     path('login/',views.login),
     path('logout/',views.logout),
-	path('show/', views.show),
-	path('parent/', views.parent),
-	path('student/', views.student),
+    path('show/', views.show),
+    path('parent/', views.parent),
+    path('student/', views.student),
+    path('student_profile/', views.student_profile),
+    path('teacher_classes/', views.teacher_classes),
+    path('teacher_students/<int:class_id>', views.teacher_students)
     
 #>>>>>>> fc8de6a5be9c837a2ec3e90f2f1dc70e16f945ef
 ]
