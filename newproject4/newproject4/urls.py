@@ -28,6 +28,10 @@ urlpatterns = [
     path('show/', views.show),
     path('parent/', views.parent),
     path('student/', views.student),
+    path('show_teacher', views.show_teacher),
+    path('edit_teacher/<int:id>', views.edit_teacher),
+    path('delete_teacher/<int:id>', views.delete_teacher),
+    path('update_teacher/<int:id>', views.update_teacher),
     path('student_profile/', views.student_profile),
     path('teacher_classes/', views.teacher_classes),
     path('teacher_students/<int:class_id>', views.teacher_students)

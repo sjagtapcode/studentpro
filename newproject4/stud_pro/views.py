@@ -3,6 +3,47 @@ from django.shortcuts import render,redirect
 from stud_pro.forms import teacherform,studentform,parentform
 from stud_pro.models import *
 
+def show_teacher(request):
+	teachers=Teacher.objects.all()
+	return render(request,"admin/show_teacher.html",{'teachers':teachers})
+
+def  admin_teacher(request):
+	if request.method == "POST" :
+		form = teacherform(request.POST)
+		if form.is_valid():
+			try :
+				#print(form.cleaned_data["teacher_name"])
+				form.save()
+				return redirect("/show_teacher")
+			except :
+				pass
+	else :
+		form = teacherform()
+	return render(request,"admin/admin_add_teacher.html",{'form':form})		
+
+
+
+def edit_teacher(request,id):
+	teacher=Teacher.objects.get(teacher_id=id)
+	return render(request,"admin/edit_teacher.html",{'teacher':teacher})
+
+def update_teacher(request,id):
+	teacher = Teacher.objects.get(teacher_id=id)
+	form=teacherform(request.POST,instance=teacher)
+	
+	#[to-do update does not work update]
+
+	if form.is_valid():
+
+		form.save()
+		return redirect('/show_teacher')
+	return render(request,"admin/edit_teacher.html",{'teacher':teacher})
+
+def delete_teacher(request,id):
+	teacher=Teacher.objects.get(teacher_id=id)
+	teacher.delete()
+	return redirect('/show_teacher')
+
 
 def show(request):
 	teachers = Teacher.objects.raw('SELECT * FROM stud_pro_teacher')
@@ -166,7 +207,7 @@ def admin(request):
 		return redirect("/login/")
 
 
-def  admin_teacher(request):
+"""def  admin_teacher(request):
 	if request.method == "POST" :
 		form = teacherform(request.POST)
 		if form.is_valid():
@@ -178,7 +219,7 @@ def  admin_teacher(request):
 				pass
 	else :
 		form = teacherform()
-	return render(request,"admin/admin_add_teacher.html",{'form':form})	
+	return render(request,"admin/admin_add_teacher.html",{'form':form})"""	
 
 def  admin_student(request):
 	if request.method == "POST" :
