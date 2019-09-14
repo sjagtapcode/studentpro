@@ -33,8 +33,8 @@ urlpatterns = [
     path('delete_teacher/<int:id>', views.delete_teacher),
     path('update_teacher/<int:id>', views.update_teacher),
     path('student_profile/', views.student_profile),
-    path('teacher_classes/', views.teacher_classes),
-    path('teacher_students/<int:class_id>', views.teacher_students)
-    
+    path('teacher/', views.teacher),
+    path('teacher/<int:class_id>', views.teacher_students)
+
 #>>>>>>> fc8de6a5be9c837a2ec3e90f2f1dc70e16f945ef
 ]

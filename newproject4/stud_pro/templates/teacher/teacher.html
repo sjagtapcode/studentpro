@@ -5,14 +5,22 @@
 {% endblock%}
 {% block body_block %}
 	<h2>THIS is teacher dashboard</h2>
+	<h4>
 
 	{% for t in teacher_det %}
-		<h4>{{t.teacher_id}}</h4>
-		<h4>{{t.teacher_name}}</h4>
-		<h4>{{t.email}}</h4>
+		<br>id = {{t.teacher_id}}
+		<br>name = {{t.teacher_name}}
+		<br>email = {{t.email}}
 	{% endfor %}
-{% endblock %}
+	<br>
+	<h4>
+	{% for c in classnamelist %}
+		<br>
+		<a href="/teacher/{{c}}" class="btn btn-info">{{ c }}</a>>
+	{% endfor %}
+	</h4>
 
+{% endblock %}
 
 {% block nav6%}
 	<a href="#">teacher</a>

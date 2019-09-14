@@ -113,7 +113,7 @@ def pClass(n):
 	for dept in sdepartment:
 		x=x+1
 		for sem in range(1,4):
-			for c in range(1,n):
+			for c in range(0,n):
 				num=(1000*x)+(100*sem)+c
 				tid=random.choice(steacher)
 				cc=tid.teacher_name
@@ -122,9 +122,9 @@ def pClass(n):
 
 def afterclass():
 	clss=Class.objects.all()
-	print(len(clss))
 	for c in clss:
 		sclass.append(c)
+
 
 # table Parent
 def pParent(n):
@@ -226,4 +226,11 @@ pStudent(230)
 print("done populating classes")
 '''
 
-
+afterclass()
+afterTeacher()
+afterClass_Teacher()
+afterSubject()
+afterTeacher_Subject()
+print("populating class_teacher")
+pClass_Teacher()
+print("done populating class_teacher")

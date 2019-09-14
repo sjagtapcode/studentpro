@@ -6,7 +6,7 @@
 {% block body_block %}
 	
 	{{details}}
-	<h2>THIS is student profile</h2>
+	<h2>THIS is student profile </h2>
 	<div class="container">
 	<div class="jumbotron jumbotron-fluid">
 
@@ -18,7 +18,6 @@
 				<th>Student attendane</th>
 				<th>Student marks</th>
 				<th>Student Email</th>
-				<th>class id</th>
 				<th>parent id</th>
 				<!--<th>Actions</th>-->
 			</tr>
@@ -31,8 +30,7 @@
 				<td>{{p.attendance}}</td>
 				<td>{{p.marks}}</td>
 				<td>{{p.email}}</td>
-				<td>{{p.class_id}}</td>
-				<td>{{p.parent_id}}</td>
+				<td>{{p.password}}</td>
 				
 			</tr>
 			{% endfor %}
