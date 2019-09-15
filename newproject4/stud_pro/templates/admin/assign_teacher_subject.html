@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% extends "home.html" %}
+{% block body_block %}
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p><a href="/admin_teacher">Add - Update - View Teacher</a></p>
+      <p><a href="/admin_student">Add New Student</a></p>
+      <p><a href="/admin_parent">Add New Parent</a></p>
+      <p><a href="/admin_teacher_subject">Assign Subjects to Teacher</a></p>
+      
+    </div>
+    <div class="col-sm-8 text-left"> 
+
+    		<div class="container">
+	<div class="jumbotron jumbotron-fluid">
+
+	<!--{% for item in all_items_feed %}-->
+    {% if item.type == 'teacher' %}
+	<table class="table table-striped table-bordered table-sm">
+		<thead class="thead-dark">
+			<tr>
+				<th>Teacher ID</th>
+				<th>Teacher Name</th>
+				<th>Teacher Email</th>
+				<!--<th>Employee Contact</th>-->
+			</tr>
+		</thead>
+		<tbody>
+			{% for employee in teachers %}
+			<tr>
+				<td>{{employee.teacher_id}}</td>
+				<td>{{employee.teacher_name}}</td>
+				<td>{{employee.email}}</td>
+				<!--<td>{{employee.econtact}}</td>-->
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+	<table class="table table-striped table-bordered table-sm">
+		<thead class="thead-dark">
+			<tr>
+				<th>Subject ID</th>
+				<th>Subject Name</th>
+				<th>semester </th>
+				<th>Department</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for employee in subjects %}
+			<tr>
+				<td>{{employee.subject_id}}</td>
+				<td>{{employee.subject_name}}</td>
+				<td>{{employee.semester}}</td>
+				<td>{{employee.dept_id}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% endif %}
+	<!--{% endfor %}-->
+
+	  <div class="jumbotron">
+
+	</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}   
+

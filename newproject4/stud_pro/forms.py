@@ -6,6 +6,11 @@ class teacherform(forms.ModelForm):
 		model = Teacher
 		fields = "__all__"
 
+class subjectform(forms.ModelForm):
+	class Meta:
+		model = Subject
+		fields = "__all__"		
+
 class studentform(forms.ModelForm):
 	cats = forms.ModelChoiceField(queryset=Class.objects.order_by('class_name').values_list('class_id', flat=True).distinct())
 	class Meta:
@@ -16,8 +21,12 @@ class studentform(forms.ModelForm):
 		#'class_id' : [Class.objects.order_by('class_name').values_list('class_id', flat=True)]
 		#}
 #	def save(self , commit=True):
-
 class parentform(forms.ModelForm):
 	class Meta:
 		model = Parent
 		fields = "__all__"
+
+class subject_teacherform(forms.ModelForm):
+	class Meta:
+		model = Teacher_Subject
+		fields = ('sub_id','teacher_id')		

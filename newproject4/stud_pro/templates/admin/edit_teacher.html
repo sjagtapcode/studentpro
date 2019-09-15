@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends "home.html" %}
+{% block body_block %}
+	<form method="POST" class="post-form" action="/update_teacher/{{teacher.teacher_id}}">
+		{% csrf_token %}
+		<div class="container">
+			<br>
+			<div class="form-group row">
+				<label class="col-sm-1 col-form-label"></label>
+				<div class="col-sm-4">
+					<h3>Edit Teacher's Details</h3>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Teacher ID:</label>
+				<div class="col-sm-4">
+					<input type="text" name="teacher_id" id="teacher_id" required maxlength="20" value="{{teacher.teacher_id}}"/> 
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Teacher Name:</label>
+				<div class="col-sm-4">
+					<input type="text" name="teacher_name" id="id_teachername" required maxlength="100" value="{{teacher.teacher_name}}"/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Teacher Email:</label>
+				<div class="col-sm-4">
+					<input type="email" name="email" id="id_teacheremail" required maxlength="254" value="{{teacher.email}}"/> 
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-1 col-form-label"></label>
+				<div class="col-sm-4">
+					<button type="submit" class="btn btn-success">Update</button>
+				</div>
+			</div>
+			
+		</div>
+		
+	</form>
+		{% endblock %}   
