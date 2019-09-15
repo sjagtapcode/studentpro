@@ -12,7 +12,8 @@ class subjectform(forms.ModelForm):
 		fields = "__all__"		
 
 class studentform(forms.ModelForm):
-	cats = forms.ModelChoiceField(queryset=Class.objects.order_by('class_name').values_list('class_id', flat=True).distinct())
+	
+	cats = forms.ModelChoiceField(queryset=Class.objects.values_list('class_id', flat=True))
 	class Meta:
 		model = Student
 		fields = "__all__"
