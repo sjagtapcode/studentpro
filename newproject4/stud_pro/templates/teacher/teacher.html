@@ -14,9 +14,9 @@
 	{% endfor %}
 	<br>
 	<h4>
-	{% for c in classnamelist %}
+	{% for c,s in classnamelist,subjectnamelist %}
 		<br>
-		<a href="/teacher/{{c}}" class="btn btn-info">{{ c }}</a>>
+		<a href="/teacher/{{c}}" class="btn btn-info">{{ c }} {{ s }}</a>>
 	{% endfor %}
 	</h4>
 
