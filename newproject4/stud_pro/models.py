@@ -30,12 +30,17 @@ class Teacher(models.Model):
 	def __str__(self):
 		return self.teacher_name
 
+#class desplay_dept_wise_teacher_sub(models.Model):
 
-# table teacher_subject
 class Teacher_Subject(models.Model):
-	sr_no = models.IntegerField(primary_key=True)
+	sr_no = models.AutoField(primary_key=True)
+	#sr_no = models.IntegerField(primary_key=True,auto_now_add=True)
 	teacher_id = models.ForeignKey(Teacher,on_delete=models.CASCADE)
 	sub_id = models.ForeignKey(Subject,on_delete=models.CASCADE)
+
+	def __str__(self):
+		return str(self.sr_no)
+
 
 # table class
 class Class(models.Model):

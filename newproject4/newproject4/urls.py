@@ -25,16 +25,31 @@ urlpatterns = [
     path('',views.login),
     path('login/',views.login),
     path('logout/',views.logout),
-    path('show/', views.show),
+	path('parent/', views.parent),
+	path('student/', views.student),
+
+   
     path('parent/', views.parent),
     path('student/', views.student),
+
     path('show_teacher', views.show_teacher),
     path('edit_teacher/<int:id>', views.edit_teacher),
     path('delete_teacher/<int:id>', views.delete_teacher),
     path('update_teacher/<int:id>', views.update_teacher),
+
+    path('teacher_subject',views.teacher_subject),
+    path('admin_teacher_subject',views.admin_teacher_subject),
+    path('admin_dept',views.admin_dept),
+    #path('admin_class',views.admin_class),
+    #path('admin_dept/<int:id>',views.admin_dept),
+    path('admin_class/<int:id>',views.admin_class),
+    path('admin_class_teacher/<int:id>',views.admin_class_teacher),
+    path('admin_class/admin_class_teacher/<int:id>',views.admin_class_teacher),
+
     path('student_profile/', views.student_profile),
     path('teacher/', views.teacher),
     path('teacher/<int:class_id>', views.teacher_students)
+
 
 #>>>>>>> fc8de6a5be9c837a2ec3e90f2f1dc70e16f945ef
 ]
